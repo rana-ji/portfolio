@@ -37,7 +37,7 @@ const Navbar = ({ setCurrentStage }) => {
             <i className="fa-brands fa-github" title="Github"></i>
           </a>
           <a href={resume} download="Abhishek_Kumar_Rana.pdf">
-            <i class="fa-solid fa-file"></i>
+            <i className="fa-solid fa-file"></i>
           </a>
         </div>
       </div>

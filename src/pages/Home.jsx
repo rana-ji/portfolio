@@ -2,7 +2,8 @@ import { Canvas } from "@react-three/fiber";
 import React, { Suspense, useEffect, useState } from "react";
 import HomeInfo from "../components/HomeInfo";
 import Navbar from "../components/Navbar";
-import { Loader } from "@react-three/drei";
+import Loader from "../components/Loader"
+
 const Sky = React.lazy(() => import("../models/Sky"));
 
 const Home = () => {
@@ -10,7 +11,6 @@ const Home = () => {
 
   const handleMobMenu = () => {
     const menu = document.querySelector(".navigator");
-    console.log("menu clicked", menu);
     if (menu) {
       menu.classList.toggle("show");
     }
