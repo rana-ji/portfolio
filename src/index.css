@@ -477,7 +477,7 @@ html {
   .navigator {
     top: 1rem;
     width: 96%;
-    height: 80vh;
+    height: 80dvh;
     z-index: 99;
     transform: translateX(-110%);
     transition: all 0.5s ease-in-out;
@@ -495,7 +495,7 @@ html {
   .content.visible {
     top: 1rem;
     width: 96%;
-    height: 80vh;
+    height: 80dvh;
   }
   .project-card {
     width: 100%;
