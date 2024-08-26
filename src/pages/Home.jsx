@@ -1,8 +1,9 @@
 import { Canvas } from "@react-three/fiber";
-import React, { useEffect, useState } from "react";
-import Sky from "../models/Sky";
+import React, { Suspense, useEffect, useState } from "react";
 import HomeInfo from "../components/HomeInfo";
 import Navbar from "../components/Navbar";
+import { Loader } from "@react-three/drei";
+const Sky = React.lazy(() => import("../models/Sky"));
 
 const Home = () => {
   const [currentStage, setCurrentStage] = useState(1);
@@ -46,7 +47,9 @@ const Home = () => {
         className="w-full h-screen bg-transparent"
         camera={{ near: 0.1, far: 1000 }}
       >
-        <Sky />
+        <Suspense fallback={<Loader />}>
+          <Sky />
+        </Suspense>
       </Canvas>
       <div className="mobile" onClick={handleMobMenu}>
         <i className="fa-solid fa-bars"></i>
