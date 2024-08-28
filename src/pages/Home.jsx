@@ -1,13 +1,11 @@
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeInfo from "../components/HomeInfo";
 import Navbar from "../components/Navbar";
-import Loader from "../components/Loader"
-
-const Sky = React.lazy(() => import("../models/Sky"));
 
 const Home = () => {
   const [currentStage, setCurrentStage] = useState(1);
+  const [meteorStyles, setMeteorStyles] = useState([]);
+  const [number] = useState(100);
 
   const handleMobMenu = () => {
     const menu = document.querySelector(".navigator");
@@ -26,6 +24,21 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const styles = Array.from({ length: number }).map(() => {
+      const size = Math.random() * 5 + 0.5;
+      return {
+        top: `${Math.floor(Math.random() * (window.innerHeight - 50))}px`,
+        left: `${Math.floor(Math.random() * window.innerWidth)}px`,
+        width: `${size}px`,
+        height: `${size}px`,
+        animationDelay: `${Math.random() * 1 + 0.2}s`,
+        animationDuration: `${Math.floor(Math.random() * 8 + 2)}s`,
+      };
+    });
+    setMeteorStyles(styles);
+  }, [number]);
+
+  useEffect(() => {
     document.addEventListener("click", performClickAction);
     return () => {
       document.removeEventListener("click", performClickAction);
@@ -33,7 +46,16 @@ const Home = () => {
   }, []);
 
   return (
-    <section className="w-full h-screen relative">
+    <section className="w-full h-screen relative bg-black overflow-hidden">
+      {meteorStyles.map((style, idx) => (
+        <span
+          key={idx}
+          style={style}
+          className="pointer-events-none absolute rotate-[215deg] animate-meteor rounded-full bg-white shadow-[0_0_0_1px_#ffffff10]"
+        >
+          <div className="pointer-events-none absolute top-1/2 -z-10 h-px w-[50px] -translate-y-1/2 bg-gradient-to-r from-white to-transparent" />
+        </span>
+      ))}
       <Navbar setCurrentStage={setCurrentStage} />
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && (
@@ -43,14 +65,6 @@ const Home = () => {
           />
         )}
       </div>
-      <Canvas
-        className="w-full h-screen bg-transparent"
-        camera={{ near: 0.1, far: 1000 }}
-      >
-        <Suspense fallback={<Loader />}>
-          <Sky />
-        </Suspense>
-      </Canvas>
       <div className="mobile" onClick={handleMobMenu}>
         <i className="fa-solid fa-bars"></i>
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import me from "../../public/me.png";
+import profile from "../assets/projects/profile.png"
 import resume from "../assets/resume.pdf";
 
 const Navbar = ({ setCurrentStage }) => {
@@ -8,7 +8,7 @@ const Navbar = ({ setCurrentStage }) => {
       <div className="navigator desktop">
         <div className="about-card">
           <div className="avatar">
-            <img src={me} />
+            <img src={profile} />
           </div>
           <p>Abhishek Kumar Rana</p>
           <p>
